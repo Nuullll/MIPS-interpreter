@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 # interpreter.py
 
+import sys
+
 def dec2bin(num, bits):
     '''convert decimal number to bin_str with n bits'''
     if num >= 0:
@@ -23,6 +25,28 @@ def parseRegister(reg_str):
 
 def delComment(line_str):
     '''delete comments in a line'''
-    return line_str[:line_str.index('#')].strip()
+    try:
+        return line_str[:line_str.index('#')].strip()
+    except ValueError:
+        return line_str.strip()
 
 
+def isLabel(non_comment_line):
+    '''return whether this line is a label'''
+    return ':' in non_comment_line
+
+
+if __name__ == '__main__':
+    with open(sys.argv[1], 'r') as sfile:
+        lines = [delComment(line) for line in sfile if delComment(line) != '']
+
+    labels = {}
+    instructions = []
+    for line in lines:
+        if isLabel(line):
+            labels[line[:-1]] = len(instructions)
+        else:
+            instructions.append(line)
+
+    print(labels)
+    print(instructions)
