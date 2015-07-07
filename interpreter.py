@@ -20,3 +20,9 @@ def parseRegister(reg_str):
     except ValueError:
         print('undefined register:', reg_str)
 
+
+def delComment(line_str):
+    '''delete comments in a line'''
+    return line_str[:line_str.index('#')].strip()
+
+
