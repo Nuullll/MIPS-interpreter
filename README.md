@@ -1,2 +1,2 @@
 # MIPS-interpreter
-interpreter MIPS instructions to machine code
+interprete MIPS instructions to machine code
