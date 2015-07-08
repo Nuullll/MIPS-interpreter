@@ -78,6 +78,8 @@ def parseInstruction(instruction):
     l = [item.rstrip(',') for item in l]
     if op in ['lw', 'sw']:
         return parseLwSw(op, l)
+    if op == 'lui':
+        return parseLui(op, l)
 
 
 def parseLwSw(op, argv):
@@ -86,8 +88,13 @@ def parseLwSw(op, argv):
     rt_str = parseRegister(argv[0])
     offset = argv[1][:argv[1].index('(')]
     rs = argv[1][argv[1].index('(')+1:argv[1].index(')')]
-    opcode = '100011' if op == 'lw' else '101011'
+    opcode = num2bin('0x23', 6) if op == 'lw' else num2bin('0x2b', 6)
     return opcode + parseRegister(rs) + rt_str + num2bin(offset, 16)
+
+
+def parseLui(op, argv):
+    '''lui rt, imm'''
+    return num2bin('0x0f', 6) + parseRegister(argv[0]) + num2bin(argv[1], 16)
 
 
 if __name__ == '__main__':
