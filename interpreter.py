@@ -86,6 +86,8 @@ def parseInstruction(instruction):
         return parseR(op, l)
     elif op in ['addi', 'addiu', 'andi', 'slti', 'sltiu']:
         return parseImm(op, l)
+    elif op in ['sll', 'srl', 'sra']:
+        return parseShift(op, l)
 
 
 def parseLwSw(op, argv):
@@ -127,6 +129,18 @@ def parseImm(op, argv):
         opcode = num2bin('0x0b', 6)
 
     return opcode + parseRegister(argv[1]) + parseRegister(argv[0]) + num2bin(argv[2], 16)
+
+
+def parseShift(op, argv):
+    '''shift rd, rt, shamt'''
+    if op == 'sll':
+        funt = '0' * 6
+    elif op == 'srl':
+        funt = num2bin('0x02', 6)
+    else:
+        funt = num2bin('0x03', 6)
+
+    return '0' * 11 + parseRegister(argv[1]) + parseRegister(argv[0]) + num2bin(shamt, 5) + funt
 
 
 if __name__ == '__main__':
