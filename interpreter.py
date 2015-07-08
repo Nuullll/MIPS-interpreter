@@ -45,6 +45,24 @@ def hex2bin(num_str, bits):
     return bin_str
 
 
+def bin2hex(bin_str):
+    '''convert binary num (word aligned) to hex num'''
+    d = {'0000':'0', '0001':'1', '0010':'2', '0011':'3',
+         '0100':'4', '0101':'5', '0110':'6', '0111':'7',
+         '1000':'8', '1001':'9', '1010':'a', '1011':'b',
+         '1100':'c', '1101':'d', '1110':'e', '1111':'f'}
+    hex_str = ''
+    word = ''
+    for bit in bin_str:
+        if len(word) < 3:
+            word += bit
+        else:
+            word += bit
+            hex_str += d[word]
+            word = ''
+    return '0x' + hex_str
+
+
 def parseRegister(reg_str):
     '''e.g. reg_str = "$zero", will be parsed to "00000"'''
     regs = ['$zero', '$at', '$v0', '$v1', '$a0', '$a1', '$a2', '$a3',
@@ -90,6 +108,12 @@ def parseInstruction(instruction, labels, cur_addr):
         return parseShift(op, l)
     elif op in ['beq', 'bne', 'blez', 'bgtz', 'bgez']:
         return parseBranch(op, l, labels, cur_addr)
+    elif op in ['j', 'jal']:
+        return parseJump(op, l, labels)
+    elif op in ['jr', 'jalr']:
+        return parseJumpReg(op, l)
+    else:
+        raise NameError('undefined instruction:', instruction)
 
 
 def parseLwSw(op, argv):
@@ -156,7 +180,7 @@ def parseBranch(op, argv, labels, cur_addr):
         raise
 
     offset = tar_addr - cur_addr - 1
-    offset_str = num2bin(offset)
+    offset_str = num2bin(str(offset), 16)
 
     if op == 'beq':
         return '000100' + parseRegister(argv[0]) + parseRegister(argv[1]) + offset_str
@@ -172,6 +196,25 @@ def parseBranch(op, argv, labels, cur_addr):
         raise NameError('unknown error')
 
 
+def parseJump(op, argv, labels):
+    '''jump label'''
+    if op == 'j':
+        return num2bin('0x02', 6) + num2bin(str(labels[argv[0]]), 26)
+    else:
+        return num2bin('0x03', 6) + num2bin(str(labels[argv[0]]), 26)
+
+
+def parseJumpReg(op, argv):
+    '''jr rs
+    jalr rd, rs
+    jalr rs'''
+    if op == 'jr':
+        return '0' * 6 + parseRegister(argv[0]) + '0' * 15 + num2bin('0x08', 6)
+    else:
+        rd_str = parseRegister(argv[0] if len(argv) == 2 else '$ra')
+        return '0' * 6 + parseRegister(argv[-1]) + '0' * 5 + rd_str + '0' * 5 + num2bin('0x09', 6)
+
+
 if __name__ == '__main__':
     with open(sys.argv[1], 'r') as sfile:
         lines = [delComment(line) for line in sfile if delComment(line) != '']
@@ -184,5 +227,10 @@ if __name__ == '__main__':
         else:
             instructions.append(line)
 
-    print(labels)
-    print(instructions)
+    with open('machinecode_bin.txt', 'w') as bin_out:
+        with open('machinecode_hex.txt', 'w') as hex_out:
+            for i in range(len(instructions)):
+                bin_str = parseInstruction(instructions[i], labels, i)
+                bin_out.write(bin_str + '\n')
+                hex_out.write(bin2hex(bin_str) + '\n')
+
