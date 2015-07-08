@@ -3,16 +3,21 @@
 
 import sys
 
-def radix(num_str):
+def num2bin(num_str, bits):
     if num_str.lower().startswith('0x'):
-        return 16
+        return hex2bin(num_str[2:], bits)
     else:
-        return 10
+        return dec2bin(num_str, bits)
 
 
 def dec2bin(num_str, bits):
     '''convert decimal number to bin_str with n bits'''
-    num = int(num_str)
+    try:
+        num = int(num_str)
+    except ValueError:
+        print('illegal decimal input:', num_str)
+        raise
+        
     if num >= 0:
         return ("{0:0%db}" % bits).format(num)
     else:
@@ -81,6 +86,7 @@ def parseLwSw(op, argv):
     rt_str = parseRegister[argv[0]]
     offset = argv[1][:argv[1].index('(')]
     rs = argv[1][argv[1].index('(')+1:argv[1].index(')')]
+
 
 
 if __name__ == '__main__':
