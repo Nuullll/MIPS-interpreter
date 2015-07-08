@@ -71,7 +71,7 @@ def isLabel(non_comment_line):
     return ':' in non_comment_line
 
 
-def parseInstruction(instruction):
+def parseInstruction(instruction, labels, cur_addr):
     '''parse instruction to bin_str'''
     l = instruction.split()
     op = l.pop(0)
@@ -88,6 +88,8 @@ def parseInstruction(instruction):
         return parseImm(op, l)
     elif op in ['sll', 'srl', 'sra']:
         return parseShift(op, l)
+    elif op in ['beq', 'bne', 'blez', 'bgtz', 'bgez']:
+        return parseBranch(op, l, labels, cur_addr)
 
 
 def parseLwSw(op, argv):
@@ -141,6 +143,33 @@ def parseShift(op, argv):
         funt = num2bin('0x03', 6)
 
     return '0' * 11 + parseRegister(argv[1]) + parseRegister(argv[0]) + num2bin(shamt, 5) + funt
+
+
+def parseBranch(op, argv, labels, cur_addr):
+    '''branch rs, rt, label
+    branchz rs, label'''
+    offset_label = argv[-1]
+    try:
+        tar_addr = labels[offset_label]
+    except KeyError:
+        print('undefined label:', offset_label)
+        raise
+
+    offset = tar_addr - cur_addr - 1
+    offset_str = num2bin(offset)
+
+    if op == 'beq':
+        return '000100' + parseRegister(argv[0]) + parseRegister(argv[1]) + offset_str
+    elif op == 'bne':
+        return '000101' + parseRegister(argv[0]) + parseRegister(argv[1]) + offset_str
+    elif op == 'blez':
+        return '000110' + parseRegister(argv[0]) + '0' * 5 + offset_str
+    elif op == 'bgtz':
+        return '000111' + parseRegister(argv[0]) + '0' * 5 + offset_str
+    elif op == 'bgez':
+        return '000001' + parseRegister(argv[0]) + '00001' + offset_str
+    else:
+        raise NameError('unknown error')
 
 
 if __name__ == '__main__':
