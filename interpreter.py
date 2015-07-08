@@ -17,7 +17,7 @@ def dec2bin(num_str, bits):
     except ValueError:
         print('illegal decimal input:', num_str)
         raise
-        
+
     if num >= 0:
         return ("{0:0%db}" % bits).format(num)
     else:
@@ -83,10 +83,11 @@ def parseInstruction(instruction):
 def parseLwSw(op, argv):
     '''lw rt, offset(rs)
     sw rt, offset(rs)'''
-    rt_str = parseRegister[argv[0]]
+    rt_str = parseRegister(argv[0])
     offset = argv[1][:argv[1].index('(')]
     rs = argv[1][argv[1].index('(')+1:argv[1].index(')')]
-
+    opcode = '100011' if op == 'lw' else '101011'
+    return opcode + parseRegister(rs) + rt_str + num2bin(offset, 16)
 
 
 if __name__ == '__main__':
