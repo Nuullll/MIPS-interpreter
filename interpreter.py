@@ -78,8 +78,14 @@ def parseInstruction(instruction):
     l = [item.rstrip(',') for item in l]
     if op in ['lw', 'sw']:
         return parseLwSw(op, l)
-    if op == 'lui':
+    elif op == 'lui':
         return parseLui(op, l)
+    elif op in ['add', 'addu', 'sub', 'subu',
+                'and', 'or', 'xor', 'nor',
+                'slt', 'sltu']:
+        return parseR(op, l)
+    elif op in ['addi', 'addiu', 'andi', 'slti', 'sltiu']:
+        return parseImm(op, l)
 
 
 def parseLwSw(op, argv):
@@ -95,6 +101,32 @@ def parseLwSw(op, argv):
 def parseLui(op, argv):
     '''lui rt, imm'''
     return num2bin('0x0f', 6) + parseRegister(argv[0]) + num2bin(argv[1], 16)
+
+
+def parseR(op, argv):
+    '''R rd, rs, rt'''
+    opcode = '0' * 6
+    l = ['add', 'addu', 'sub', 'subu', 'and', 'or', 'xor', 'nor']
+    funt = num2bin(str(int('0x20', 16) + l.index(op)), 6) if op in l else (num2bin('0x2a', 6)
+            if op == 'slt' else num2bin('0x2b', 6))
+    return (opcode + parseRegister(argv[1]) + parseRegister(argv[2])
+            + parseRegister(argv[0]) + '0' * 5 + funt)
+
+
+def parseImm(op, argv):
+    '''Ri rt, rs, imm'''
+    if op == 'addi':
+        opcode = num2bin('0x08', 6)
+    elif op == 'addiu':
+        opcode = num2bin('0x09', 6)
+    elif op == 'andi':
+        opcode = num2bin('0x0c', 6)
+    elif op == 'slti':
+        opcode = num2bin('0x0a', 6)
+    else:
+        opcode = num2bin('0x0b', 6)
+
+    return opcode + parseRegister(argv[1]) + parseRegister(argv[0]) + num2bin(argv[2], 16)
 
 
 if __name__ == '__main__':
