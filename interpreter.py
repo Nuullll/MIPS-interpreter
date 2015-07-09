@@ -132,7 +132,7 @@ def parseLwSw(op, argv):
 
 def parseLui(op, argv):
     '''lui rt, imm'''
-    return num2bin('0x0f', 6) + parseRegister(argv[0]) + num2bin(argv[1], 16)
+    return num2bin('0x0f', 6) + '0' * 5 + parseRegister(argv[0]) + num2bin(argv[1], 16)
 
 
 def parseR(op, argv):
