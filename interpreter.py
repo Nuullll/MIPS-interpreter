@@ -85,9 +85,12 @@ def delComment(line_str):
         return line_str.strip()
 
 
-def isLabel(non_comment_line):
-    '''return whether this line is a label'''
-    return ':' in non_comment_line
+def parseLabel(non_comment_line):
+    '''parse label and instruction'''
+    if ':' in non_comment_line:
+        return (True, non_comment_line[non_comment_line.index(':')+1:].strip())
+    else:
+        return (False, non_comment_line)
 
 
 def parseInstruction(instruction, labels, cur_addr):
@@ -223,10 +226,13 @@ if __name__ == '__main__':
     labels = {}
     instructions = []
     for line in lines:
-        if isLabel(line):
+        label, instruction = parseLabel(line)
+        if label:
             labels[line[:-1]] = len(instructions)
+            if instruction != '':
+                instructions.append(instruction)
         else:
-            instructions.append(line)
+            instructions.append(instruction)
 
     with open('machinecode_bin.txt', 'w') as bin_out:
         with open('machinecode_hex.txt', 'w') as hex_out:
