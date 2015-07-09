@@ -167,7 +167,7 @@ def parseShift(op, argv):
     else:
         funt = num2bin('0x03', 6)
 
-    return '0' * 11 + parseRegister(argv[1]) + parseRegister(argv[0]) + num2bin(shamt, 5) + funt
+    return '0' * 11 + parseRegister(argv[1]) + parseRegister(argv[0]) + num2bin(argv[2], 5) + funt
 
 
 def parseBranch(op, argv, labels, cur_addr):
