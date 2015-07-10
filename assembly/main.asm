@@ -48,6 +48,7 @@ Reset:
     sw      $t0, 4($s2)         # TL = 0xffffffff
     addi    $t0, $zero, 3
     sw      $t0, 8($s2)         # TCON = 3
+    jr      $zero 
 
 
 Break:
@@ -145,4 +146,3 @@ Display:
 
 Exception:
     jr      $k1                 # jump to $27
-    
