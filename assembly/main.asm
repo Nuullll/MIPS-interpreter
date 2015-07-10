@@ -101,6 +101,9 @@ Loop4:
     j       Loop4
 
 Scan:
+    addi    $v0, $a0, 0     # result: v0 = a0
+    sw      $v0, 12($s2)    # led = v0
+    
     lw      $t0, 20($s2)    # t0 = digi
     srl     $t1, $t0, 8     # t1 = {..., digi[11:8]}
     andi    $t1, $t1, 0x000f    # t1 = {0...0, digi[11:8]}
