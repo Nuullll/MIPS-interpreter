@@ -81,22 +81,22 @@ module InstructionMemory(Address, Instruction);
             8'd36: Instruction <= 32'h3c124000;
             // sw      $zero,  8($s2)
             8'd37: Instruction <= 32'hae400008;
-            // lui     $t0,  0xffff
-            8'd38: Instruction <= 32'h3c08ffff;
-            // addi    $t0,  $t0,  0x3caf
-            8'd39: Instruction <= 32'h21083caf;
+            // addi    $t0,  $zero,  0xfff0
+            8'd38: Instruction <= 32'h2008fff0;
             // sw      $t0,  0($s2)
-            8'd40: Instruction <= 32'hae480000;
-            // addi    $t0,  $t0,  50000
-            8'd41: Instruction <= 32'h2108c350;
+            8'd39: Instruction <= 32'hae480000;
+            // addi    $t0,  $zero,  0xffff
+            8'd40: Instruction <= 32'h2008ffff;
             // sw      $t0,  4($s2)
-            8'd42: Instruction <= 32'hae480004;
+            8'd41: Instruction <= 32'hae480004;
             // addi    $t0,  $zero,  3
-            8'd43: Instruction <= 32'h20080003;
+            8'd42: Instruction <= 32'h20080003;
             // sw      $t0,  8($s2)
-            8'd44: Instruction <= 32'hae480008;
-            // jr      $zero
-            8'd45: Instruction <= 32'h00000008;
+            8'd43: Instruction <= 32'hae480008;
+            // addi    $t0,  $zero,  0x00b4
+            8'd44: Instruction <= 32'h200800b4;
+            // jr      $t0
+            8'd45: Instruction <= 32'h01000008;
             // lw      $t0,  8($s2)
             8'd46: Instruction <= 32'h8e480008;
             // andi    $t0,  $t0,  0xfff9
