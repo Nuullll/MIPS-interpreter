@@ -60,6 +60,8 @@ Break:
     # $s0 = operand0, $s1 = operand1
     addi    $a0, $s0, 0
     addi    $a1, $s1, 0
+    beq     $a0, $zero, Scan    # return 0
+    beq     $a1, $zero, Opr1zero    # a1 = 0
     addi    $t0, $zero, 0   # t0 counts trailing zeros of operand0
     addi    $t1, $zero, 0   # t1 counts trailing zeros of operand1
     addi    $t2, $zero, 1   # t2 = 1
@@ -101,6 +103,8 @@ Loop4:
     sll     $a0, $a0, 1     # a0 *= 2
     j       Loop4
 
+Opr1zero:
+    addi    $a0, $zero, 0
 Scan:
     addi    $v0, $a0, 0     # result: v0 = a0
     sw      $v0, 12($s2)    # led = v0
