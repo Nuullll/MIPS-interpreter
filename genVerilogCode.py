@@ -11,7 +11,7 @@ module InstructionMemory(Address, Instruction);
     always @(*)
         case (Address[9:2])
 '''
-    with open('InstructionMemory.v', 'w') as output:
+    with open('output/InstructionMemory.v', 'w') as output:
         output.write(begin_str)
         indent = ' ' * 12
         with open(hex_input_file, 'r') as hex_input:

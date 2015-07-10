@@ -236,11 +236,11 @@ if __name__ == '__main__':
         else:
             instructions.append(instruction)
 
-    with open('machinecode_bin.txt', 'w') as bin_out:
-        with open('machinecode_hex.txt', 'w') as hex_out:
+    with open('output/machinecode_bin.txt', 'w') as bin_out:
+        with open('output/machinecode_hex.txt', 'w') as hex_out:
             for i in range(len(instructions)):
                 bin_str = parseInstruction(instructions[i], labels, i)
                 bin_out.write(bin_str + '\n')
                 hex_out.write(bin2hex(bin_str) + '\n')
 
-    genCode('machinecode_hex.txt', instructions)
+    genCode('output/machinecode_hex.txt', instructions)
