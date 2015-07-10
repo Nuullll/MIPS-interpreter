@@ -2,6 +2,7 @@
 # interpreter.py
 
 import sys
+from genVerilogCode import *
 
 def num2bin(num_str, bits):
     if num_str.lower().startswith('0x'):
@@ -242,3 +243,4 @@ if __name__ == '__main__':
                 bin_out.write(bin_str + '\n')
                 hex_out.write(bin2hex(bin_str) + '\n')
 
+    genCode('machinecode_hex.txt', instructions)
