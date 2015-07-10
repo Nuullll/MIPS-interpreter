@@ -79,6 +79,7 @@ def parseRegister(reg_str):
 def delComment(line_str):
     '''delete comments in a line'''
     line_str = line_str.replace(',', ', ')
+    line_str = line_str.replace(':', ': ')
     try:
         return line_str[:line_str.index('#')].strip()
     except ValueError:
