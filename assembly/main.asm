@@ -41,14 +41,15 @@ Reset:
 
     lui     $s2, 0x4000         # addr of timer: 0x40000000
     sw      $zero, 8($s2)       # TCON = 0
-    lui     $t0, 0xffff
-    addi    $t0, $t0, 0x3caf    # 0xffffffff - 0xffff3caf = 50000
-    sw      $t0, 0($s2)         # TH = 0xffff3caf
-    addi    $t0, $t0, 50000
+    addi    $t0, $zero, 0xfff0  # 0xfffffff0
+    sw      $t0, 0($s2)         # TH = 0xfffffff0
+    addi    $t0, $zero, 0xffff
     sw      $t0, 4($s2)         # TL = 0xffffffff
     addi    $t0, $zero, 3
     sw      $t0, 8($s2)         # TCON = 3
-    jr      $zero 
+    
+    addi    $t0, $zero, 0x00b4  # jump register: 45th instruction
+    jr      $t0
 
 
 Break:
@@ -103,7 +104,7 @@ Loop4:
 Scan:
     addi    $v0, $a0, 0     # result: v0 = a0
     sw      $v0, 12($s2)    # led = v0
-    
+
     lw      $t0, 20($s2)    # t0 = digi
     srl     $t1, $t0, 8     # t1 = {..., digi[11:8]}
     andi    $t1, $t1, 0x000f    # t1 = {0...0, digi[11:8]}
