@@ -144,6 +144,5 @@ Display:
     jr      $k0                 # jump to $26
 
 Exception:
-
-
+    jr      $k1                 # jump to $27
     
