@@ -184,17 +184,18 @@ def parseBranch(op, argv, labels, cur_addr):
 
     offset = tar_addr - cur_addr - 1
     offset_str = num2bin(str(offset), 16)
+    rs_str = parseRegister(argv[0])
 
     if op == 'beq':
-        return '000100' + parseRegister(argv[0]) + parseRegister(argv[1]) + offset_str
+        return '000100' + rs_str + parseRegister(argv[1]) + offset_str
     elif op == 'bne':
-        return '000101' + parseRegister(argv[0]) + parseRegister(argv[1]) + offset_str
+        return '000101' + rs_str + parseRegister(argv[1]) + offset_str
     elif op == 'blez':
-        return '000110' + parseRegister(argv[0]) + '0' * 5 + offset_str
+        return '000110' + rs_str + '0' * 5 + offset_str
     elif op == 'bgtz':
-        return '000111' + parseRegister(argv[0]) + '0' * 5 + offset_str
+        return '000111' + rs_str + '0' * 5 + offset_str
     elif op == 'bgez':
-        return '000001' + parseRegister(argv[0]) + '00001' + offset_str
+        return '000001' + rs_str + '00001' + offset_str
     else:
         raise NameError('unknown error')
 
