@@ -203,9 +203,9 @@ def parseBranch(op, argv, labels, cur_addr):
 def parseJump(op, argv, labels):
     '''jump label'''
     if op == 'j':
-        return num2bin('0x02', 6) + num2bin(str(labels[argv[0]]), 26)
+        return num2bin('0x02', 6) + num2bin(str(labels[argv[0]] * 4), 26)
     else:
-        return num2bin('0x03', 6) + num2bin(str(labels[argv[0]]), 26)
+        return num2bin('0x03', 6) + num2bin(str(labels[argv[0]] * 4), 26)
 
 
 def parseJumpReg(op, argv):
