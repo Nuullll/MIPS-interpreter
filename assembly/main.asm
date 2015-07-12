@@ -41,8 +41,8 @@ Reset:
 
     lui     $s2, 0x4000         # addr of timer: 0x40000000
     sw      $zero, 8($s2)       # TCON = 0
-    addi    $t0, $zero, 0xffe6
-    sw      $t0, 0($s2)         # TH = 0xffffffe6
+    addi    $t0, $zero, 0xcf2b
+    sw      $t0, 0($s2)         # TH = 0xffffcf2b, t = 0.5ms
     addi    $t0, $zero, 0xffff
     sw      $t0, 4($s2)         # TL = 0xffffffff
     addi    $t0, $zero, 3
