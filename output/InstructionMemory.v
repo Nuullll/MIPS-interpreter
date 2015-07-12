@@ -10,7 +10,7 @@ module InstructionMemory(Address, Instruction);
             // j       Break
             8'd1: Instruction <= 32'h0800002e;
             // j       Exception
-            8'd2: Instruction <= 32'h08000076;
+            8'd2: Instruction <= 32'h08000077;
             // addi    $gp,  $zero,  0
             8'd3: Instruction <= 32'h201c0000;
             // addi    $t0,  $zero,  0x0040
@@ -81,8 +81,8 @@ module InstructionMemory(Address, Instruction);
             8'd36: Instruction <= 32'h3c124000;
             // sw      $zero,  8($s2)
             8'd37: Instruction <= 32'hae400008;
-            // addi    $t0,  $zero,  0xfff0
-            8'd38: Instruction <= 32'h2008fff0;
+            // lui     $t0,  0xfe83
+            8'd38: Instruction <= 32'h3c08fe83;
             // sw      $t0,  0($s2)
             8'd39: Instruction <= 32'hae480000;
             // addi    $t0,  $zero,  0xffff
@@ -196,53 +196,55 @@ module InstructionMemory(Address, Instruction);
             // addi    $t6,  $zero,  0x0008
             8'd94: Instruction <= 32'h200e0008;
             // beq     $t1,  $t3,  Digi1
-            8'd95: Instruction <= 32'h112b0003;
+            8'd95: Instruction <= 32'h112b0004;
             // beq     $t1,  $t4,  Digi2
-            8'd96: Instruction <= 32'h112c0004;
+            8'd96: Instruction <= 32'h112c0005;
             // beq     $t1,  $t5,  Digi3
-            8'd97: Instruction <= 32'h112d0005;
+            8'd97: Instruction <= 32'h112d0006;
             // beq     $t1,  $t6,  Digi4
-            8'd98: Instruction <= 32'h112e0006;
+            8'd98: Instruction <= 32'h112e0007;
+            // addi    $t1,  $zero,  0x0001
+            8'd99: Instruction <= 32'h20090001;
             // srl     $t2,  $s0,  4
-            8'd99: Instruction <= 32'h00105102;
+            8'd100: Instruction <= 32'h00105102;
             // j       Display
-            8'd100: Instruction <= 32'h0800006b;
+            8'd101: Instruction <= 32'h0800006c;
             // andi    $t2,  $s0,  0x000f
-            8'd101: Instruction <= 32'h320a000f;
+            8'd102: Instruction <= 32'h320a000f;
             // j       Display
-            8'd102: Instruction <= 32'h0800006b;
+            8'd103: Instruction <= 32'h0800006c;
             // srl     $t2,  $s1,  4
-            8'd103: Instruction <= 32'h00115102;
+            8'd104: Instruction <= 32'h00115102;
             // j       Display
-            8'd104: Instruction <= 32'h0800006b;
+            8'd105: Instruction <= 32'h0800006c;
             // andi    $t2,  $s1,  0x000f
-            8'd105: Instruction <= 32'h322a000f;
+            8'd106: Instruction <= 32'h322a000f;
             // j       Display
-            8'd106: Instruction <= 32'h0800006b;
+            8'd107: Instruction <= 32'h0800006c;
             // sll     $t2,  $t2,  2
-            8'd107: Instruction <= 32'h000a5080;
+            8'd108: Instruction <= 32'h000a5080;
             // add     $t3,  $gp,  $t2
-            8'd108: Instruction <= 32'h038a5820;
+            8'd109: Instruction <= 32'h038a5820;
             // lw      $t2,  0($t3)
-            8'd109: Instruction <= 32'h8d6a0000;
+            8'd110: Instruction <= 32'h8d6a0000;
             // sll     $t1,  $t1,  8
-            8'd110: Instruction <= 32'h00094a00;
+            8'd111: Instruction <= 32'h00094a00;
             // add     $t0,  $t1,  $t2
-            8'd111: Instruction <= 32'h012a4020;
+            8'd112: Instruction <= 32'h012a4020;
             // sw      $t0,  20($s2)
-            8'd112: Instruction <= 32'hae480014;
+            8'd113: Instruction <= 32'hae480014;
             // lw      $t0,  8($s2)
-            8'd113: Instruction <= 32'h8e480008;
+            8'd114: Instruction <= 32'h8e480008;
             // addi    $t1,  $zero,  0x0002
-            8'd114: Instruction <= 32'h20090002;
+            8'd115: Instruction <= 32'h20090002;
             // or      $t0,  $t0,  $t1
-            8'd115: Instruction <= 32'h01094025;
+            8'd116: Instruction <= 32'h01094025;
             // sw      $t0,  8($s2)
-            8'd116: Instruction <= 32'hae480008;
+            8'd117: Instruction <= 32'hae480008;
             // jr      $k0
-            8'd117: Instruction <= 32'h03400008;
+            8'd118: Instruction <= 32'h03400008;
             // jr      $k1
-            8'd118: Instruction <= 32'h03600008;
+            8'd119: Instruction <= 32'h03600008;
             default: Instruction <= 32'h00000000;
         endcase
 endmodule

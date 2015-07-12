@@ -41,7 +41,7 @@ Reset:
 
     lui     $s2, 0x4000         # addr of timer: 0x40000000
     sw      $zero, 8($s2)       # TCON = 0
-    addi    $t0, $zero, 0xfff0  # 0xfffffff0
+    lui     $t0, 0xfe83
     sw      $t0, 0($s2)         # TH = 0xfffffff0
     addi    $t0, $zero, 0xffff
     sw      $t0, 4($s2)         # TL = 0xffffffff
@@ -125,6 +125,7 @@ Select:
     beq     $t1, $t4, Digi2
     beq     $t1, $t5, Digi3
     beq     $t1, $t6, Digi4
+    addi    $t1, $zero, 0x0001  # initial
 Digi1:
     srl     $t2, $s0, 4
     j       Display
