@@ -27,56 +27,56 @@ module InstructionMemory(Address, Instruction);
             8'd9: Instruction <= 32'haf880008;
             // addi    $t0,  $zero,  0x0030
             8'd10: Instruction <= 32'h20080030;
-            // sw      $t0,  16($gp)
-            8'd11: Instruction <= 32'haf880010;
+            // sw      $t0,  12($gp)
+            8'd11: Instruction <= 32'haf88000c;
             // addi    $t0,  $zero,  0x0019
             8'd12: Instruction <= 32'h20080019;
-            // sw      $t0,  20($gp)
-            8'd13: Instruction <= 32'haf880014;
+            // sw      $t0,  16($gp)
+            8'd13: Instruction <= 32'haf880010;
             // addi    $t0,  $zero,  0x0012
             8'd14: Instruction <= 32'h20080012;
-            // sw      $t0,  24($gp)
-            8'd15: Instruction <= 32'haf880018;
+            // sw      $t0,  20($gp)
+            8'd15: Instruction <= 32'haf880014;
             // addi    $t0,  $zero,  0x0002
             8'd16: Instruction <= 32'h20080002;
-            // sw      $t0,  28($gp)
-            8'd17: Instruction <= 32'haf88001c;
+            // sw      $t0,  24($gp)
+            8'd17: Instruction <= 32'haf880018;
             // addi    $t0,  $zero,  0x0078
             8'd18: Instruction <= 32'h20080078;
-            // sw      $t0,  32($gp)
-            8'd19: Instruction <= 32'haf880020;
+            // sw      $t0,  28($gp)
+            8'd19: Instruction <= 32'haf88001c;
             // addi    $t0,  $zero,  0x0000
             8'd20: Instruction <= 32'h20080000;
-            // sw      $t0,  36($gp)
-            8'd21: Instruction <= 32'haf880024;
+            // sw      $t0,  32($gp)
+            8'd21: Instruction <= 32'haf880020;
             // addi    $t0,  $zero,  0x0010
             8'd22: Instruction <= 32'h20080010;
-            // sw      $t0,  40($gp)
-            8'd23: Instruction <= 32'haf880028;
+            // sw      $t0,  36($gp)
+            8'd23: Instruction <= 32'haf880024;
             // addi    $t0,  $zero,  0x0008
             8'd24: Instruction <= 32'h20080008;
-            // sw      $t0,  44($gp)
-            8'd25: Instruction <= 32'haf88002c;
+            // sw      $t0,  40($gp)
+            8'd25: Instruction <= 32'haf880028;
             // addi    $t0,  $zero,  0x0003
             8'd26: Instruction <= 32'h20080003;
-            // sw      $t0,  48($gp)
-            8'd27: Instruction <= 32'haf880030;
+            // sw      $t0,  44($gp)
+            8'd27: Instruction <= 32'haf88002c;
             // addi    $t0,  $zero,  0x0046
             8'd28: Instruction <= 32'h20080046;
-            // sw      $t0,  52($gp)
-            8'd29: Instruction <= 32'haf880034;
+            // sw      $t0,  48($gp)
+            8'd29: Instruction <= 32'haf880030;
             // addi    $t0,  $zero,  0x0021
             8'd30: Instruction <= 32'h20080021;
-            // sw      $t0,  56($gp)
-            8'd31: Instruction <= 32'haf880038;
+            // sw      $t0,  52($gp)
+            8'd31: Instruction <= 32'haf880034;
             // addi    $t0,  $zero,  0x0006
             8'd32: Instruction <= 32'h20080006;
-            // sw      $t0,  60($gp)
-            8'd33: Instruction <= 32'haf88003c;
+            // sw      $t0,  56($gp)
+            8'd33: Instruction <= 32'haf880038;
             // addi    $t0,  $zero,  0x000e
             8'd34: Instruction <= 32'h2008000e;
-            // sw      $t0,  64($gp)
-            8'd35: Instruction <= 32'haf880040;
+            // sw      $t0,  60($gp)
+            8'd35: Instruction <= 32'haf88003c;
             // lui     $s2,  0x4000
             8'd36: Instruction <= 32'h3c124000;
             // sw      $zero,  8($s2)

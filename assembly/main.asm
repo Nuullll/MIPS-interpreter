@@ -13,31 +13,31 @@ Reset:
     addi    $t0, $zero, 0x0024  # 2
     sw      $t0, 8($gp)
     addi    $t0, $zero, 0x0030  # 3
-    sw      $t0, 16($gp)
+    sw      $t0, 12($gp)
     addi    $t0, $zero, 0x0019  # 4
-    sw      $t0, 20($gp)
+    sw      $t0, 16($gp)
     addi    $t0, $zero, 0x0012  # 5
-    sw      $t0, 24($gp)
+    sw      $t0, 20($gp)
     addi    $t0, $zero, 0x0002  # 6
-    sw      $t0, 28($gp)
+    sw      $t0, 24($gp)
     addi    $t0, $zero, 0x0078  # 7
-    sw      $t0, 32($gp)
+    sw      $t0, 28($gp)
     addi    $t0, $zero, 0x0000  # 8
-    sw      $t0, 36($gp)
+    sw      $t0, 32($gp)
     addi    $t0, $zero, 0x0010  # 9
-    sw      $t0, 40($gp)
+    sw      $t0, 36($gp)
     addi    $t0, $zero, 0x0008  # A
-    sw      $t0, 44($gp)
+    sw      $t0, 40($gp)
     addi    $t0, $zero, 0x0003  # b
-    sw      $t0, 48($gp)
+    sw      $t0, 44($gp)
     addi    $t0, $zero, 0x0046  # C
-    sw      $t0, 52($gp)
+    sw      $t0, 48($gp)
     addi    $t0, $zero, 0x0021  # d
-    sw      $t0, 56($gp)
+    sw      $t0, 52($gp)
     addi    $t0, $zero, 0x0006  # E
-    sw      $t0, 60($gp)
+    sw      $t0, 56($gp)
     addi    $t0, $zero, 0x000e  # F
-    sw      $t0, 64($gp)
+    sw      $t0, 60($gp)
 
     lui     $s2, 0x4000         # addr of timer: 0x40000000
     sw      $zero, 8($s2)       # TCON = 0
