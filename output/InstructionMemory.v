@@ -93,10 +93,10 @@ module InstructionMemory(Address, Instruction);
             8'd42: Instruction <= 32'h20080003;
             // sw      $t0,  8($s2)
             8'd43: Instruction <= 32'hae480008;
-            // addi    $t0,  $zero,  0x00b4
-            8'd44: Instruction <= 32'h200800b4;
-            // jr      $t0
-            8'd45: Instruction <= 32'h01000008;
+            // addi    $s3,  $zero,  0x00b4
+            8'd44: Instruction <= 32'h201300b4;
+            // jr      $s3
+            8'd45: Instruction <= 32'h02600008;
             // lw      $t0,  8($s2)
             8'd46: Instruction <= 32'h8e480008;
             // andi    $t0,  $t0,  0xfff9

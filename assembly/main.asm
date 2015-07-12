@@ -48,8 +48,8 @@ Reset:
     addi    $t0, $zero, 3
     sw      $t0, 8($s2)         # TCON = 3
     
-    addi    $t0, $zero, 0x00b4  # jump register: 45th instruction
-    jr      $t0
+    addi    $s3, $zero, 0x00b4  # jump register
+    jr      $s3
 
 
 Break:
